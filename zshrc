@@ -56,6 +56,12 @@ plugins=(git git-flow)
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# enable sanity check for rm *
+setopt RM_STAR_WAIT
+
+# spelling correction
+setopt CORRECT
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
