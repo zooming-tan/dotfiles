@@ -44,8 +44,9 @@ Plugin 'mileszs/ack.vim'
 "" auto-detect project root directory
 Plugin 'airblade/vim-rooter'
 
-"" colorscheme
+"" colorscheme (select by invoking 'colorscheme <name>')
 Plugin 'crusoexia/vim-monokai'
+Plugin 'tomasr/molokai'
 
 "" source project-specific vimrc, name: .local.vimrc
 Plugin 'thinca/vim-localrc'
@@ -294,8 +295,9 @@ syntax on
 set ruler
 set number
 
-"" colorscheme
+"" use the colorscheme found in 'colors/{name}.vim'
 colorscheme monokai
+"colorscheme molokai
 
 "" visual autocomplete for command menu
 set wildmenu
