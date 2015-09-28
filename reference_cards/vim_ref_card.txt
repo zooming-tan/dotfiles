@@ -1,20 +1,10 @@
-TODO
-<<<< convert to database? auto sort(rank) based on feedback? >>>>
-<<<< map using <Leader> key: e.g. <Leader>sifc sif >>>>>>
-<<<< <Leader>nl - insert a new line >>>>>
-<<<< auto-(un)comment hotkey -> plugin >>>>
-<<<< "" after done filling, move cursor to the right, outside the quotes >>>>
-<<<< map ; to : >>>> -- any alternative, since ; is used by fX
-<<<< fugitive >>>>
-<<<< integrate ctrl-p with ag/ack, vim / -> omnisearch interface? with unite.vim as reference? >>>  -- inc. search (refining)
-<<<< vim wiki plugin >>>>
-<<<< :h expand -> symbols >>>>
-<<<<< vim list >>>>>
-<<<<< setqflist() , cexpr>>>>>
-<<<<< fugitive-git is crap >>>>>
-<<<<< vim broken paste, copy to/paste from clipboard? >>>>>
-
+# --------- vim ------------
+TIPS: with relative numbering, 20gg is nrq. Instead use 10k (up) or 9j(down)
+<C-r><C-w> : insert the word under the cursor, very useful
+[[, ]]: jump to the start and end of a def/class identifier
+/\<(red|blue|green)\> : search for exact words
 <Leader>d, then again : display(toggle) changes since last write
+c], [c: vim-gitgutter(git diff) go to the next change
 <C-c> : cancel partial command
 daw   : delete the word under the cursor
 caw   : delete the word under the cursor and put you in insert mode
@@ -70,7 +60,6 @@ git log -n 3: view the commit history
 git reset   : simply unstaging everything
 git reset --hard: Clears your index(staging area), reverts all changes in your working directory to the last commit.
 
-
 " fugitive git bindings
 nnoremap <space>ga :Git add %:p<CR><CR>
 nnoremap <space>gs :Gstatus<CR>
@@ -86,4 +75,25 @@ nnoremap <space>gm :Gmove<Space>
 nnoremap <space>gb :Git branch<Space>
 nnoremap <space>go :Git checkout<Space>
 nnoremap <space>gps :Dispatch! git push<CR>
-nnoremap <space>gpl :Dispatch! git pull<CR>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+nnoremap <space>gpl :Dispatch! git pull<CR>"
+
+TODO
+<<<< convert to database? auto sort(rank) based on feedback? >>>>
+<<<< map using <Leader> key: e.g. <Leader>sifc sif >>>>>>
+<<<< <Leader>nl - insert a new line >>>>>
+<<<< auto-(un)comment hotkey -> plugin >>>>
+<<<< "" after done filling, move cursor to the right, outside the quotes >>>>
+<<<< map ; to : >>>> -- any alternative, since ; is used by fX
+<<<< fugitive >>>>
+<<<< integrate ctrl-p with ag/ack, vim / -> omnisearch interface? with unite.vim as reference? >>>  -- inc. search (refining)
+<<<< vim wiki plugin >>>>
+<<<< :h expand -> symbols >>>>
+<<<<< vim list >>>>>
+<<<<< setqflist() , cexpr>>>>>
+<<<<< fugitive-git is crap >>>>>
+<<<<< vim broken paste, copy to/paste from clipboard? >>>>>
+
+# -------- python dirty tricks --------
+1) import inspect
+>> inspect.getfile(os)
+'/usr/lib64/python2.7/os.pyc'

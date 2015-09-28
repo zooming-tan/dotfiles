@@ -66,8 +66,11 @@ Plugin 'scrooloose/syntastic'
 "" navigate between tmux and vim splits seamlessly
 Plugin 'christoomey/vim-tmux-navigator'
 
-"" compare the changes since the last save
+"" compare the changes since the last save (not with git revision)
 Plugin 'vim-scripts/diffchanges.vim'
+
+"" show git diff in the gutter (sign column)
+Plugin 'airblade/vim-gitgutter'
 
 "" All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -95,12 +98,17 @@ set laststatus=2
 "" [M          Jump on previous class or method (normal, visual, operator modes)
 "" ]M          Jump on next class or method (normal, visual, operator modes)
 
+"" daC, yaC, vaC (class), daM, yaM, vaM (method)
+let g:pymode_motion = 1
+
 "" Rope:
 "" <Ctrl-Space>  Rope autocomplete
 "" <Ctrl-c>g     Rope goto definition
 "" <Ctrl-c>d     Rope show documentation
 "" <Ctrl-c>f     Rope find occurrences
 let g:pymode_rope = 0
+"" disable rope completion (use YouCompleteMe plugin instead)
+let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
 
 "" Documentation:
@@ -272,7 +280,7 @@ set ignorecase
 set smartcase
 
 "" <Leader> key timeout
-set timeoutlen=500
+""set timeoutlen=500
 
 "" Encoding
 "set bomb
@@ -407,6 +415,7 @@ inoremap " ""<Esc>i
 
 "" map // to grep (Ag) -> vs. /
 nnoremap // :Ack!<Space>
+nnoremap /// :Ack!<Space><C-r><C-w><cr>
 
 "" compare the changes made since the last save
 nnoremap <leader>d :DiffChangesPatchToggle<cr>
