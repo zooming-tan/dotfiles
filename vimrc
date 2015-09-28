@@ -72,6 +72,10 @@ Plugin 'vim-scripts/diffchanges.vim'
 "" show git diff in the gutter (sign column)
 Plugin 'airblade/vim-gitgutter'
 
+"" browse tags of a file and gain overview
+"" requires: exuberant-ctags
+Plugin 'majutsushi/tagbar' " press <F8> to toggle
+
 "" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -148,14 +152,14 @@ let g:pymode_utils_whitespaces = 1
 "****************************
 "" You Complete Me
 "****************************
-"" enables auto closing of the preview window when the user accepts the
+"" Enables auto closing of the preview window when the user accepts the
 "" offered completion string
 let g:ycm_autoclose_preview_window_after_completion=1
 
 "" <leader>g to go to the definition/declaration
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-"" make YCM compatible with UltiSnips (using supertab)
+"" Make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -163,7 +167,7 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 "****************************
 "" UltiSnips
 "****************************
-"" better key bindings for UltiSnipsExpandTrigger
+"" Better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
@@ -178,7 +182,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
-"" file listing
+"" File listing
 let g:ctrlp_user_command = {
   \ 'types': {
     \ 1: ['.git', 'cd %s && git ls-files'],
@@ -187,7 +191,7 @@ let g:ctrlp_user_command = {
   \ 'fallback': 'ag %s -l --nocolor -g ""'
   \ }
 
-"" speed up
+"" Speed up
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 "****************************
@@ -209,7 +213,7 @@ noremap <Leader>gl :silent! Glog --oneline --all --decorate --graph<CR>:bot cope
 " git add or stage the file to the index
 noremap <Leader>ga :Gwrite<CR>
 
-" revert the state of the file to the last commit
+" Revert the state of the file to the last commit
 noremap <Leader>gr :Gread<CR>
 
 "" git status
@@ -234,7 +238,7 @@ let g:syntastic_style_warning_symbol='⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors=1
 
-"" disable syntax checking for python (handled by python-mode)
+"" Disable syntax checking for python (handled by python-mode)
 let g:syntastic_mode_map = { 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['html', 'python'] }
@@ -250,7 +254,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 "" Show lines numbers
 set number
 
-"" auto-reload files that have been changed outside of vim
+"" Auto-reload files that have been changed outside of vim
 set autoread
 
 "" Fix backspace indent
@@ -295,6 +299,7 @@ set noswapfile
 set fileformats=unix,dos,mac
 set showcmd
 set shell=/bin/sh
+set mouse=a
 
 "****************************
 "" Visual Settings
@@ -303,11 +308,11 @@ syntax on
 set ruler
 set number
 
-"" use the colorscheme found in 'colors/{name}.vim'
+"" Use the colorscheme found in 'colors/{name}.vim'
 colorscheme monokai
 "colorscheme molokai
 
-"" visual autocomplete for command menu
+"" Visual autocomplete for command menu
 set wildmenu
 
 " Open new split panes to right and bottom, which feels more natural
@@ -317,7 +322,7 @@ set splitright
 " Always use vertical diffs
 set diffopt+=vertical
 
-"" highlight matching [{()}]
+"" Highlight matching [{()}]
 set showmatch
 
 " Display extra whitespace
@@ -328,16 +333,16 @@ set list
 autocmd FileType gitcommit setlocal textwidth=72
 autocmd FileType gitcommit setlocal spell
 
-"" always keep the cursor centered
+"" Always keep the cursor centered
 set scrolloff=999
 
-"" set the color of the line numbers
+"" Set the color of the line numbers
 highlight LineNr ctermfg=grey
 
-"" highlight trailing spaces
+"" Highlight trailing spaces
 highlight SpecialKey ctermbg=darkgrey ctermfg=red
 
-"" for faster line navigation
+"" Faster line navigation
 if v:version >= 703
     set relativenumber
 endif
@@ -366,10 +371,10 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" Alternate between the last two files
+"" Alternate between the last two files
 nnoremap <leader><leader> <c-^>
 
-" allow the . to execute once for each line of a visual selection
+"" Allow the . to execute once for each line of a visual selection
 vnoremap . :normal .<CR>
 
 "" Exit from insert mode
@@ -402,10 +407,10 @@ map <silent> <leader> :noh<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Shift-b to move cursor to the beginning of line
+"" Shift-b to move cursor to the beginning of line
 nnoremap B ^
 
-" Bracket matching
+"" Bracket matching
 inoremap ( ()<Esc>i
 inoremap { {}<Esc>i
 inoremap [ []<Esc>i
@@ -413,10 +418,20 @@ inoremap < <><Esc>i
 inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
 
-"" map // to grep (Ag) -> vs. /
+"" No matching
+inoremap '( (
+inoremap '{ {
+inoremap '[ [
+inoremap '< <
+inoremap '' '
+inoremap '" "
+
+"" Map // to grep (Ag) -> vs. /
 nnoremap // :Ack!<Space>
 nnoremap /// :Ack!<Space><C-r><C-w><cr>
 
-"" compare the changes made since the last save
+"" Compare the changes made since the last save
 nnoremap <leader>d :DiffChangesPatchToggle<cr>
 
+"" Tagbar browser
+nmap <F8> :TagbarToggle<CR>
