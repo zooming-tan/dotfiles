@@ -195,7 +195,7 @@ let g:ctrlp_user_command = {
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 "****************************
-"" ack (alternative for grep)
+"" ack
 "****************************
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor " override to use ag over grep
@@ -362,6 +362,13 @@ filetype indent on
 "" Automatically remove trailing whitespaces
 autocmd FileType vim,text,python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+"" Disable 'Press ENTER or type command to continue' prompt when
+"" running through an external program. Usage: :SILENT <an external tool>
+command! -nargs=1 SILENT
+\ | execute ':silent !'.<q-args>
+\ | execute ':redraw!'
+"" Or alternatively append a <CR> to the command sequence...
+
 "****************************
 "" Mappings
 "****************************
@@ -382,8 +389,8 @@ inoremap <esc> <nop>
 inoremap jk <esc>
 
 "" Disable arrow keys
-noremap <Up> <nop>
-noremap <Down> <nop>
+""noremap <Up> <nop>
+""noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
 
@@ -427,11 +434,24 @@ inoremap '' '
 inoremap '" "
 
 "" Map // to grep (Ag) -> vs. /
-nnoremap // :Ack!<Space>
-nnoremap /// :Ack!<Space><C-r><C-w><cr>
 
 "" Compare the changes made since the last save
+"" TODO: type zz, if cannot close, invoke diff view
 nnoremap <leader>d :DiffChangesPatchToggle<cr>
 
 "" Tagbar browser
 nmap <F8> :TagbarToggle<CR>
+
+" Find a pattern in the CURRENT buffer [/, *] {{{
+" The quickfix window will not be opened automatically upon search.
+" Press the mapped key to invoke it manually instead.
+function! ToggleQuickFixWin(filename)
+    windo if &l:buftype == "quickfix" |
+            \ cclose | return | endif
+
+    " Access the register for the last search pattern used by /{pattern} and *
+    execute 'vimgrep /'.@/.'/j '.a:filename | botright copen
+endfunction
+
+nnoremap L :call ToggleQuickFixWin(expand('%'))<CR>
+" }}}

@@ -1,4 +1,16 @@
 # --------- vim ------------
+<DNE>TODO >>> "TOGGLE" philosophy, -> minimizes keystrokes and memorization
+::: CURRENT_BUFFER(not FILE!) (default: do not open the quickfix list) ::: (philosophy: do not open quickfix unless explicitly requested, to facilitate jumping to the next occurence)
+TODO >>> / (custom vimgrep (/{pattern}/j option to prevent jumping to the fist occurence}) from wikia, then /{same pattrn}...}), n to navigatee to the next occureence, leader-w key to open/close quickfix list (:cw)
+TODO>>> remap * (same as /, but searches the word under the cursor), the rest is the same
+::: PROJECT FILES TRACKED BY GIT REPOSITORY (default: open the quickfix window) :::
+TODO >>> <leader>/ ->if the current file is tracked by git repo && git exists, use git-grep(if :Ggrep exists use Ggrep, custom command wrapper q-args), else use vimgrep.  finally open :copen(instead of :cwindow -> so that the result shows blank if no match is found.)
+TODO >>> <leader>* - current word
+
+TODO >>> use vimviki on vimrc
+TODO >>> copy internal variables definition in vimwiki page
+
+TODO >>> USE COMMAND to wrap Ggrep, augment with ack's quickfix navigation(the shortcuts only work in the quickfix window!! how?)
 TIPS: with relative numbering, 20gg is nrq. Instead use 10k (up) or 9j(down)
 <C-r><C-w> : insert the word under the cursor, very useful
 [[, ]]: jump to the start and end of a def/class identifier
@@ -7,7 +19,7 @@ TIPS: with relative numbering, 20gg is nrq. Instead use 10k (up) or 9j(down)
 c], [c: vim-gitgutter(git diff) go to the next change
 <C-c> : cancel partial command
 daw   : delete the word under the cursor
-caw   : delete the word under the cursor and put you in insert mode
+caw   : ,delete the word under the cursor and put you in insert mode
 *     : search for word under cursor
 <space> : switch off search highlight
 =     : format selected code
