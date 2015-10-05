@@ -1,17 +1,22 @@
 # --------- vim ------------
-<DNE>TODO >>> "TOGGLE" philosophy, -> minimizes keystrokes and memorization
-::: CURRENT_BUFFER(not FILE!) (default: do not open the quickfix list) ::: (philosophy: do not open quickfix unless explicitly requested, to facilitate jumping to the next occurence)
-TODO >>> / (custom vimgrep (/{pattern}/j option to prevent jumping to the fist occurence}) from wikia, then /{same pattrn}...}), n to navigatee to the next occureence, leader-w key to open/close quickfix list (:cw)
-TODO>>> remap * (same as /, but searches the word under the cursor), the rest is the same
-::: PROJECT FILES TRACKED BY GIT REPOSITORY (default: open the quickfix window) :::
-TODO >>> <leader>/ ->if the current file is tracked by git repo && git exists, use git-grep(if :Ggrep exists use Ggrep, custom command wrapper q-args), else use vimgrep.  finally open :copen(instead of :cwindow -> so that the result shows blank if no match is found.)
-TODO >>> <leader>* - current word
 
 TODO >>> use vimviki on vimrc
-TODO >>> copy internal variables definition in vimwiki page
+TODO >>> copy internal variables definition into vimwiki page
 
 TODO >>> USE COMMAND to wrap Ggrep, augment with ack's quickfix navigation(the shortcuts only work in the quickfix window!! how?)
+TIPS: :vimgrep PATTERN **/* "search recursively regardless of whether is tracked by a repo
+TIPS: qf window => use arrow keys to navigate, press o to open & close qf, v to open in split (configured in ftplugin/qf.vim)
+TIPS: to list custom maps, use e.g. :nmap, imap, vmap
 TIPS: with relative numbering, 20gg is nrq. Instead use 10k (up) or 9j(down)
+
+#session_name: e.g. WORK PLAY
+tmux new -s session_name
+tmux attach -t session_name
+tmux switch -t session_name
+tmux list-sessions
+tmux detach (prefix + d)
+
+:qa   : to attempt to close all windows
 <C-r><C-w> : insert the word under the cursor, very useful
 [[, ]]: jump to the start and end of a def/class identifier
 /\<(red|blue|green)\> : search for exact words
@@ -39,6 +44,7 @@ if has('XXX') : XXX is a feature, e.g. vim --version, +python
 
 tip: do something, then visual-select block and press . to repeat the command on each line
 
+:up[date] instead of :w
 cit, dit, yit, vit : inside tags <>
 similarly ci", ci{ and so forth
 
@@ -105,7 +111,9 @@ TODO
 <<<<< fugitive-git is crap >>>>>
 <<<<< vim broken paste, copy to/paste from clipboard? >>>>>
 
-# -------- python dirty tricks --------
-1) import inspect
->> inspect.getfile(os)
-'/usr/lib64/python2.7/os.pyc'
+<DNE>TODO >>> "TOGGLE" philosophy, -> minimizes keystrokes and memorization
+::: CURRENT_BUFFER(not FILE!) (default: do not open the quickfix list) ::: (philosophy: do not open quickfix unless explicitly requested, to facilitate jumping to the next occurence)
+TODO >>> / (custom vimgrep (/{pattern}/j option to prevent jumping to the fist occurence}) from wikia, then /{same pattrn}...}), n to navigatee to the next occureence, leader-w key to open/close quickfix list (:cw)
+TODO>>> remap * (same as /, but searches the word under the cursor), the rest is the same
+::: PROJECT FILES TRACKED BY GIT REPOSITORY (default: open the quickfix window) :::
+TODO >>> <leader>sgc ->if the current file is tracked by git repo && git exists, use git-grep(if :Ggrep exists use Ggrep, custom command wrapper q-args), else use vimgrep.  finally open :copen(instead of :cwindow -> so that the result shows blank if no match is found.)

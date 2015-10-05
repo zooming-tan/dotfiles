@@ -8,3 +8,6 @@ ln -s $(pwd)/vimrc $HOME/.vimrc
 
 # tmux
 ln -s $(pwd)/tmux.conf $HOME/.tmux.conf
+
+# zsh
+ln -s $(pwd)/zshrc $HOME/.zshrc
