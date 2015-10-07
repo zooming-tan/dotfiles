@@ -16,6 +16,16 @@ tmux switch -t session_name
 tmux list-sessions
 tmux detach (prefix + d)
 
+#window/tab management (try to mirror tmux keys..)
+<C-w>T: open current buffer in new tab
+<C-w>=: normalize all opened windows
+<C-w>R: Swap top/bottom or left/right split
+<C-w>o: Close every window in the current tabview but the current one
+gt: :tabnext, or 3gt to go to tab number 3
+gT: :tabprevious
+:tabclose
+
+vap then :sort, dap, yap: a paragraph, delimited by a blank line
 :qa   : to attempt to close all windows
 <C-r><C-w> : insert the word under the cursor, very useful
 [[, ]]: jump to the start and end of a def/class identifier
