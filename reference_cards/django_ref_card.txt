@@ -1,0 +1,30 @@
+http://jeffknupp.com/blog/2013/12/18/starting-a-django-16-project-the-right-way/
+# TIPS: remember to invoke "workon your_proj_name" to switch to the correct virtua env, otherwise import error will be thrown.
+# TIPS: chmod +x ./manage.py so that we don't have to type 'python ./manage.py XXXX' every time!
+
+# setup django (virtualenvwrapper)
+>> mkvirtualenv {project_name} #to create new virtual environment
+>> deactivate #to stop working on project and return to the system installation
+>> workon {project_name} #to resume working on the project
+finally pip freeze > requirements.txt and commit into VCS, AND write the listed modules into "install_requirements" argument of distutils.setup() in setup.py
+# >> pip freeze can also show the currently installed packages in current virtual env!
+
+# setup project folder (use cookiecutter alternatively??)
+ >>django-admin.py startproject {project_name} #WITHIN the virtual env, invoke to create a proj folder.
+>> tree [dir_name] # to inspect directory structure in treeview
+
+# set up version control system (install git-flow through your distro pkg mgr)
+git flow init # default to develop branch
+git flow feature start <feature_name> # create feature/<feature_name> branch
+''  ''   ''      finish  '' #merge into develop branch and delete the feature branch
+git flow release start <release_no> # create a release/<release_no> RC branch
+''  ''   ''      finish  # merge into master and develop branches
+## more info:https://danielkummer.github.io/git-flow-cheatsheet/
+
+# setup autoenv and cookiecutter (project bootstrap and config)
+http://stevenloria.com/three-command-line-tools-for-productive-python-development/
+Usage: cookiecutter {git URL for templates as found in https://github.com/audreyr/cookiecutter}
+
+# database migration
+pip install south
+https://south.readthedocs.org/en/latest/tutorial/part1.html#tutorial-part-1

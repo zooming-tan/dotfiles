@@ -1,0 +1,44 @@
+# jedi vim
+<leader>d ~ go to definition
+<leader>g ~ go to assignment
+<C-space> ~ python autocomplete, <tab> ~ supertab gneral purpose completion (filename, directory, etc)
+<leader>n ~ find all usages of a name
+K ~ show docstring
+:Pyimport MODULE ~ open module file (alt: import inspect >> inspect.getfile(os)'/usr/lib64/python2.7/os.pyc'
+
+builtin STR.startswith('XXX')->boolean, STR.endswith('XXX') :we can supply a TUPLE of prefix/suffix to search with
+STR.split() or .split('/') returns a list
+
+## needs vim compiled with +python or +python3 feature
+## => provides :python command to exec python code (:h python)
+## => import vim (built-in module!)
+# interface py with vim
+let s:python_version = 'null'
+function! jedi#setup_py_version(py_version)
+    if a:py_version == 2
+        let cmd_init = 'pyfile'
+        let cmd_exec = 'python'
+        let s:python_version = 2
+    elseif a:py_version == 3
+        let cmd_init = 'py3file'
+        let cmd_exec = 'python3'
+        let s:python_version = 3
+    else
+        throw "jedi#setup_py_version: invalid py_version: ".a:py_version
+    endif
+
+    try
+## execute => enable us to exec external tools, e.g. py
+## pyfile -> executes py script contained in a FILE
+## python -> vim's python is not the same as bash's python. It only executes A STATEMENT...in this case, a function call !!!!
+        execute cmd_init.' '.s:script_path.'/initialize.py' #import modules
+        execute 'command! -nargs=1 PythonJedi '.cmd_exec.' <args>' #def command object
+        return 1
+    catch
+        throw "jedi#setup_py_version: ".v:exception
+    endtry
+endfunction
+
+function! jedi#goto()
+    PythonJedi jedi_vim.goto(mode="goto") ## note: jedi_vim.py has already been imported during the initialization (pyfile /path/init.py)
+endfunction
