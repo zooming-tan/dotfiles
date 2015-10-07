@@ -89,7 +89,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#virtualenvwrapper
 source ~/.autoenv/activate.sh
 export WORKON_HOME=$HOME/.virtualenvs
 #export PROJECT_HOME=$HOME/directory-you-do-development-in
 source /usr/local/bin/virtualenvwrapper.sh
+
+#autoenv
+source /usr/local/bin/activate.sh
