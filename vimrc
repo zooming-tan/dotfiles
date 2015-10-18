@@ -244,6 +244,7 @@ nnoremap zz :q<cr>
 "map <silent> <leader><cr> :noh<cr>
 map <silent> <leader> :noh<cr>
 
+nnoremap <leader>w  :w<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
@@ -269,7 +270,7 @@ nnoremap B ^
 "" Compare the changes made since the last save
 "" TODO: 1. type zz, if cannot close, invoke diff view
 ""       2. type zz from within quickfix window should quit the window
-nnoremap <leader>d :DiffChangesPatchToggle<cr>
+nnoremap <leader>dd :DiffChangesPatchToggle<cr>
 
 "" Convenient searching
 "" s = search (within the current file)

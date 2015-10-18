@@ -1,19 +1,27 @@
 http://jeffknupp.com/blog/2013/12/18/starting-a-django-16-project-the-right-way/
-# TIPS: remember to invoke "workon your_proj_name" to switch to the correct virtua env, otherwise import error will be thrown.
-# TIPS: chmod +x ./manage.py so that we don't have to type 'python ./manage.py XXXX' every time!
+# TIP: remember to invoke "workon your_proj_name" to switch to the correct virtua env, otherwise import error will be thrown.
+# TIP: chmod +x ./manage.py so that we don't have to type 'python ./manage.py XXXX' every time!
 
-# setup django (virtualenvwrapper)
->> mkvirtualenv {project_name} #to create new virtual environment
->> deactivate #to stop working on project and return to the system installation
->> workon {project_name} #to resume working on the project
-finally pip freeze > requirements.txt and commit into VCS, AND write the listed modules into "install_requirements" argument of distutils.setup() in setup.py
-# >> pip freeze can also show the currently installed packages in current virtual env!
+################
+# setup django
+################
+>> sudo pip install virtualenvwrapper ##system wide, wrapper, provides more cmd
+>> mkvirtualenv <project_name> ##create a new virtual environment, in the folder specified by $WORKON_HOME path in .zshrc
+>> deactivate ##return to system installation env
+>> workon <project_name> #to resume working on the project
+>> pip install <django AND whatever you want> #will be self-contained within the virtual env
+>> finally...(1)pip freeze > requirements.txt (2)git add & commit the txt AND (3)enumerate the listed modules/pkgs into "install_requirements" argument of distutils.setup() found in setup.py
+** pip freeze can also show the currently installed modules/pkgs in the current virtual env!
+** rmvirtualenv <proj_name> to delete environment
 
 # setup project folder (use cookiecutter alternatively??)
  >>django-admin.py startproject {project_name} #WITHIN the virtual env, invoke to create a proj folder.
 >> tree [dir_name] # to inspect directory structure in treeview
 
-# set up version control system (install git-flow through your distro pkg mgr)
+################
+# git setup
+################
+## git flow (installed via distro pkg mgr)
 git flow init # default to develop branch
 git flow feature start <feature_name> # create feature/<feature_name> branch
 ''  ''   ''      finish  '' #merge into develop branch and delete the feature branch
@@ -21,10 +29,77 @@ git flow release start <release_no> # create a release/<release_no> RC branch
 ''  ''   ''      finish  # merge into master and develop branches
 ## more info:https://danielkummer.github.io/git-flow-cheatsheet/
 
+####################
+# first run w/o apps
+####################
+>> edit UTC in settings.py
+>>./manage.py migrate #create necessary databases for each app in INSTALLED_APPS (settings.py)
+>>./manage.py runserver #simulate server env (for dev only)
+>> open in the browser
+
+#################
+# creating apps
+#################
+>> ./manage.py startapp <app_name> #create a template folder
+>> add models in <app_name>/models.py
+>> (!!) add '<app_name>' to INSTALLED_APPS in settings.py
+>> run ./manage.py migrate again to generate databases
+
+## makemigrations -- migrate
+
+>> ./manage.py makemigrations [app_name(optional)] # create migrations (they are simply python scripts in migrations/ folder)
+>> then ./manage.py migrate #django will try to apply the changes to the database/scripts ordered by the app names, only if there are no dependencies that have to be resolved first
+
+###############################
+# Django database API via shell
+###############################
+>> ./manage.py shell # start a python shell with DJANGO_SETTINGS_MODULE set
+# Create a new Question.
+# Support for time zones is enabled in the default settings file, so
+# Django expects a datetime with tzinfo for pub_date. Use timezone.now()
+# instead of datetime.datetime.now() and it will do the right thing.
+>>> from django.utils import timezone
+>>> q = Question(question_text="What's new?", pub_date=timezone.now())
+# Save the object into the database. You have to call save() explicitly.
+>>> q.save()
+# Now it has an ID. Note that this might say "1L" instead of "1", depending
+# on which database you're using. That's no biggie; it just means your
+# database backend prefers to return integers as Python long integer
+# objects.
+>>> q.id
+1
+# Access model field values via Python attributes.
+>>> q.question_text
+"What's new?"
+>>> q.pub_date
+datetime.datetime(2012, 2, 26, 13, 0, 0, 775217, tzinfo=<UTC>)
+# Change values by changing the attributes, then calling save().
+>>> q.question_text = "What's up?"
+>>> q.save()
+# objects.all() displays all the questions in the database.
+>>> Question.objects.all()
+[<Question: Question object>]
+
+## better representation of object
+from django.db import models
+
+class Question(models.Model):
+    # ...
+    def __str__(self):              # __unicode__ on Python 2
+        return self.question_text
+
+class Choice(models.Model):
+    # ...
+    def __str__(self):              # __unicode__ on Python 2
+        return self.choice_text
+
+More info on Django database API: db/queries.html
+
+#################
+# Additional refs
+#################
 # setup autoenv and cookiecutter (project bootstrap and config)
 http://stevenloria.com/three-command-line-tools-for-productive-python-development/
 Usage: cookiecutter {git URL for templates as found in https://github.com/audreyr/cookiecutter}
 
 # database migration
-pip install south
-https://south.readthedocs.org/en/latest/tutorial/part1.html#tutorial-part-1

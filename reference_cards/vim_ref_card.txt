@@ -1,7 +1,14 @@
 # --------- vim ------------
+## quickstart
+nnoremap h :vs $HOME/.vim/reference_cards/vim_ref_card.txt<CR>
+nnoremap hp :vs $HOME/.vim/reference_cards/python_ref_card.txt<CR>
+nnoremap hg :vs $HOME/.vim/reference_cards/git_ref_card.txt<CR>
+nnoremap hd :vs $HOME/.vim/reference_cards/django_ref_card.txt<CR>
+TODO >>> remember tmux session (incl.virtualenv)
 
 TODO >>> use vimviki on vimrc
 TODO >>> copy internal variables definition into vimwiki page
+TODO >>> /usr/share/vim/vim74/syntax/*.vim --> pre-packaged syntax highlighting files
 
 TODO >>> USE COMMAND to wrap Ggrep, augment with ack's quickfix navigation(the shortcuts only work in the quickfix window!! how?)
 TIPS: :vimgrep PATTERN **/* "search recursively regardless of whether is tracked by a repo
@@ -15,8 +22,11 @@ tmux attach -t session_name
 tmux switch -t session_name
 tmux list-sessions
 tmux detach (prefix + d)
+tmux >> prefix+n or prefix+p to navigate between tmux windows
+tmux >> open new window?? ls windows??? move tmux pane to new window???
+tmux-resurrect >> prefix ctrl-s (save session), prefix ctrl-r (restore)
 
-#window/tab management (try to mirror tmux keys..)
+#window/tab management (pls try to mirror tmux keys..)
 <C-w>T: open current buffer in new tab
 <C-w>=: normalize all opened windows
 <C-w>R: Swap top/bottom or left/right split
