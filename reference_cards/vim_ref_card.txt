@@ -35,6 +35,8 @@ gt: :tabnext, or 3gt to go to tab number 3
 gT: :tabprevious
 :tabclose
 
+ctrl-p: Ctrl+v to open in vertical splits
+ctrl-j,k : navigates
 vap then :sort, dap, yap: a paragraph, delimited by a blank line
 :qa   : to attempt to close all windows
 <C-r><C-w> : insert the word under the cursor, very useful

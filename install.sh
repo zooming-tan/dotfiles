@@ -11,3 +11,5 @@ ln -s $(pwd)/tmux.conf $HOME/.tmux.conf
 
 # zsh
 ln -s $(pwd)/zshrc $HOME/.zshrc
+
+ln -s $(pwd)/reference_cards $HOME/.vim/reference_cards
