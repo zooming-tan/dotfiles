@@ -302,3 +302,4 @@ nnoremap hp :vs $HOME/.vim/reference_cards/python_ref_card.txt<CR>
 nnoremap hg :vs $HOME/.vim/reference_cards/git_ref_card.txt<CR>
 nnoremap hd :vs $HOME/.vim/reference_cards/django_ref_card.txt<CR>
 
+autocmd FileType python inoremap // #<space>
