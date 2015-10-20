@@ -101,6 +101,10 @@ Plugin 'christoomey/vim-tmux-navigator'
 "" Compare the changes since the last save (not with git revision)
 Plugin 'vim-scripts/diffchanges.vim'
 
+"" HTML/CSS abbr expansion!
+Plugin 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<C-Z>'
+
 "" Show git diff in the gutter (sign column), replaces git diff
 ""Plugin 'airblade/vim-gitgutter'
 

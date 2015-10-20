@@ -90,11 +90,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #virtualenvwrapper
-source ~/.autoenv/activate.sh
 export WORKON_HOME=$HOME/.virtualenvs
 #export PROJECT_HOME=$HOME/directory-you-do-development-in
 source /usr/local/bin/virtualenvwrapper.sh
 
-#autoenv
+#autoenv (sudo pip install autoenv -> auto-activate env
+#based on the presence of a .env file in the proj dir
 source /usr/local/bin/activate.sh
 
