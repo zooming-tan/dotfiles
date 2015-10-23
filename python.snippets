@@ -1,3 +1,5 @@
+# type snip then <Tab> to expand 
+
 #convert CamelCase to underscored string
 global !p
 def convert(name):
@@ -41,4 +43,21 @@ class ${1:MODELNAME}DetailView(DetailView):
         context = super($1DetailView, self).get_context_data(**kwargs)
         context['${2:ADDITIONAL_ITEM}'] = ${3:EG_FROM_THE_OTHER_TABLE}
         return context
+endsnippet
+
+global !p
+def convert_string(string):
+    import re
+    return re.sub('[\-\/]+', '_', string)
+endglobal
+
+global !p
+def convert_to_camelcase(string):
+    string = string.replace('-', ' ')
+    string = string.replace('/', ' ')
+    return string.title().replace(' ', '')
+endglobal
+
+snippet url "generic URLconf, no URL named groups" b
+    url(r'^${1:TOPIC}/', `!p snip.rv = convert_to_camelcase(t[1])`${2:VIEWTYPE}View.as_view(), name="`!p snip.rv = convert_string(t[1])`"),
 endsnippet
