@@ -1,0 +1,44 @@
+#convert CamelCase to underscored string
+global !p
+def convert(name):
+    import re
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+endglobal
+
+# show the /about/ page
+snippet templatev "TemplateView" b
+class ${1:MODELNAME}TemplateView(TemplateView):
+    context_object_name = '`!p snip.rv = convert(t[1])`_list'
+    template_name = '`!p snip.rv = convert(t[1])`_list.html'
+
+    # append additional item(s) to send to the template
+    def get_context_data(self, **kwargs):
+        context = super($1TemplateView, self).get_context_data(**kwargs)
+        context['${2:ADDITIONAL_ITEM}'] = ${3:EG_FROM_THE_OTHER_TABLE}
+        return context
+endsnippet
+
+# list the rows in the table (filtered or truncated)
+snippet listv "ListView" b
+class ${1:MODELNAME}ListView(ListView):
+    context_object_name = '`!p snip.rv = convert(t[1])`_list'
+    template_name = '`!p snip.rv = convert(t[1])`_list.html'
+
+    def get_queryset(self):
+        self.${2/\w+\s*/\l$0/} = get_object_or_404(${2:COLUMNNAME}, name=self.args[0])
+        return $1.objects.filter(${2/\w+\s*/\l$0/}=self.${2/\w+\s*/\l$0/})
+endsnippet
+
+# Show the detail of AN table entry
+snippet detailv "DetailView" b
+class ${1:MODELNAME}DetailView(DetailView):
+    context_object_name = '`!p snip.rv = convert(t[1])`_detail'
+    template_name = '`!p snip.rv = convert(t[1])`_detail.html'
+
+    # append additional item(s) to send to the template
+    def get_context_data(self, **kwargs):
+        context = super($1DetailView, self).get_context_data(**kwargs)
+        context['${2:ADDITIONAL_ITEM}'] = ${3:EG_FROM_THE_OTHER_TABLE}
+        return context
+endsnippet
