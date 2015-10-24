@@ -16,6 +16,12 @@ TIPS: qf window => use arrow keys to navigate, press o to open & close qf, v to 
 TIPS: to list custom maps, use e.g. :nmap, imap, vmap
 TIPS: with relative numbering, 20gg is nrq. Instead use 10k (up) or 9j(down)
 
+#vim-surround
+ds': delete surround
+cs"' : change surround from " to '
+ysiw) or ( does not matter : you-surround the word
+ysiw<q> : <q>XXX</q>
+
 #session_name: e.g. WORK PLAY
 tmux new -s session_name
 tmux attach -t session_name

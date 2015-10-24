@@ -105,6 +105,8 @@ Plugin 'vim-scripts/diffchanges.vim'
 Plugin 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
+Plugin 'tpope/vim-surround'
+
 "" Show git diff in the gutter (sign column), replaces git diff
 ""Plugin 'airblade/vim-gitgutter'
 
