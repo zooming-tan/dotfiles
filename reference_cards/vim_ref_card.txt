@@ -1,4 +1,4 @@
-# --------- vim ------------
+# --------- 99m ------------
 ## quickstart
 nnoremap h :vs $HOME/.vim/reference_cards/vim_ref_card.txt<CR>
 nnoremap hp :vs $HOME/.vim/reference_cards/python_ref_card.txt<CR>
@@ -41,8 +41,10 @@ gt: :tabnext, or 3gt to go to tab number 3
 gT: :tabprevious
 :tabclose
 
+search regex using / first, then :%s//XXX/g to replace (use last search term)
 ctrl-p: Ctrl+v to open in vertical splits
 ctrl-j,k : navigates
+vit, vat, dit, yit etc: between opening and closing HTML tag
 vap then :sort, dap, yap: a paragraph, delimited by a blank line
 :qa   : to attempt to close all windows
 <C-r><C-w> : insert the word under the cursor, very useful
